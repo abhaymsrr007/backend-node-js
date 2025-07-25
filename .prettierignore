@@ -1,0 +1,20 @@
+# Ignore build output
+/dist
+
+# Ignore dependencies
+/node_modules
+
+# Ignore VS Code settings
+/.vscode
+# Ignore logs
+*.log
+/.vscode
+
+# Ignore environment files
+*.env
+.env
+.env.*
+
+# Ignore specific files or folders
+src/generated/
+public/
