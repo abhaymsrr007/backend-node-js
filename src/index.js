@@ -4,7 +4,7 @@ import connectDB from "./db/index.js";
 import { app } from "./app.js";
 
 // import express from "express";
-// const app = express();
+// const app = express();  
 
 connectDB().then(() => {
     console.log("Connected to MongoDB");

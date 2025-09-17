@@ -1,57 +1,66 @@
-
 import mongoose, { Schema } from "mongoose";
 
-
-const videoSchema = new Schema({
+import mongooseAggregatePaginateV2 from "mongoose-aggregate-paginate-v2";
+const videoSchema = new Schema(
+  {
     videofile: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     thumbnail: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     title: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true,
     },
     description: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true,
     },
     duration: {
-        type: Number, // from cloudinary
-        required: true,
+      type: Number, // from cloudinary
+      required: true,
     },
     views: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,
     },
-    
+
     videoUrl: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Users",
-        required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Users",
+      required: true,
     },
-    likes: [{
+    likes: [
+      {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
-    }],
-    dislikes: [{
+      },
+    ],
+    dislikes: [
+      {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
-    }],
-    comments: [{
+      },
+    ],
+    comments: [
+      {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comments",
-    }],
-   
-}, { timestamps: true });
+      },
+    ],
+  },
+  { timestamps: true }
+);
+
+videoSchema.plugin(mongooseAggregatePaginateV2);
 
 export const Videos = mongoose.model("Videos", videoSchema);
