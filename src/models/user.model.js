@@ -40,6 +40,9 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    refreshToken: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
@@ -57,7 +60,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 };
 
 userSchema.methods.generateAccessToken = function () {
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this._id,
       email: this.email,
@@ -66,7 +69,7 @@ userSchema.methods.generateAccessToken = function () {
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
-      expiresIn: ACCESS_TOKEN_EXPIRY,
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
     }
   );
 };
@@ -77,7 +80,7 @@ userSchema.methods.generateRefreshToken = function () {
     },
     process.env.REFRESS_TOKEN_SECRET,
     {
-      expiresIn: REFRESS_TOKEN_EXPIRY,
+      expiresIn: process.env.REFRESS_TOKEN_EXPIRY,
     }
   );
 };

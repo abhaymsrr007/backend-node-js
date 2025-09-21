@@ -15,7 +15,7 @@ const uploadOnCloudinary = async (localFilePath) => {
       resource_type: "auto",
     });
     // file has been uploaded succesfull
-    console.log("file has been uploaded succesfull ", response.url);
+    console.log("file has been uploaded succesfull ", response);
     return response;
   } catch (error) {
     fs.unlinkSync(localFilePath); // remove the llocaally saved temprory file as the upload
