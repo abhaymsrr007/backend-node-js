@@ -19,7 +19,7 @@ connectDB()
     // app.use(express.json()); // Middleware to parse JSON requests
   })
   .catch((error) => {
-    console.error("Error connecting to MongoDB:", error);
+    console.error("Error connecting to MongoDB1:", error);
   });
 
 /*

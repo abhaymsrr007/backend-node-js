@@ -1,6 +1,7 @@
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import express from "express";
+import { errorMiddleware } from "./middlewares/error.middleware.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json({ limit: "16kb" })); // Middleware to parse JSON requests
 app.use(express.urlencoded({ extended: true, limit: "16kb" })); // Middleware to parse URL-encoded requests
 app.use(express.static("public")); // Serve static files from the 'public' directory
 app.use(cookieParser()); // Middleware to parse cookies
+app.use(errorMiddleware);
 
 //routes import
 import userRouter from "./routes/user.routes.js";
