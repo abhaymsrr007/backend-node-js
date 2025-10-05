@@ -1,6 +1,6 @@
 // middlewares/error.middleware.js
 const errorMiddleware = (err, req, res, next) => {
-  console.error("Error:", err);
+  console.error("Error: using errorMiddleware", err);
 
   const statusCode = err.statusCode || 500;
 

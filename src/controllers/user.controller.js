@@ -5,6 +5,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken";
 import { Types } from "mongoose";
+import { logLoginAttempt } from "../middlewares/logger.js";
 
 // Generate Access & Refresh Tokens
 const generateAccessAndRefreshTokens = async (userId) => {
@@ -72,9 +73,10 @@ const registerUser = asyncHandler(async (req, res) => {
 // Login User
 const loginUser = asyncHandler(async (req, res) => {
   const { email, username, password } = req.body;
-
-  if (!(username || email))
+  if (!(username || email)) {
+    logLoginAttempt(email || username, false); // Log failed attempt
     throw new ApiError(400, "Username or email is required!");
+  }
 
   const user = await User.findOne({ $or: [{ username }, { email }] });
   if (!user) throw new ApiError(404, "User does not exist!");
